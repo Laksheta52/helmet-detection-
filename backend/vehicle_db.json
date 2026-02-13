@@ -1,0 +1,17 @@
+{
+  "DL-01-AB-1234": {
+    "phone": "+919876543210",
+    "owner": "Demo Driver 1",
+    "vehicle_type": "Motorcycle"
+  },
+  "DL-02-CD-5678": {
+    "phone": "+919876543211",
+    "owner": "Demo Driver 2",
+    "vehicle_type": "Car"
+  },
+  "MH-12-EF-9012": {
+    "phone": "+919876543212",
+    "owner": "Demo Driver 3",
+    "vehicle_type": "Motorcycle"
+  }
+}

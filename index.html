@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Third Eye - AI Traffic Safety Detection</title>
+    <meta name="description" content="Advanced AI-powered helmet detection and traffic violation analysis">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <!-- Background Elements -->
+    <div class="bg-gradient"></div>
+    <div class="bg-shapes">
+        <div class="shape shape-1"></div>
+        <div class="shape shape-2"></div>
+        <div class="shape shape-3"></div>
+    </div>
+
+    <div class="app-container">
+        <!-- Header -->
+        <header class="header-glass">
+            <div class="header-content">
+                <div class="logo-area">
+                    <div class="logo-circle">
+                        <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+                            <path d="M16 2L2 9L16 16L30 9L16 2Z" fill="url(#gradient1)" />
+                            <path d="M2 23L16 30L30 23L16 16L2 23Z" fill="url(#gradient2)" />
+                            <defs>
+                                <linearGradient id="gradient1" x1="2" y1="2" x2="30" y2="16">
+                                    <stop stop-color="#6366F1" />
+                                    <stop offset="1" stop-color="#8B5CF6" />
+                                </linearGradient>
+                                <linearGradient id="gradient2" x1="2" y1="16" x2="30" y2="30">
+                                    <stop stop-color="#8B5CF6" />
+                                    <stop offset="1" stop-color="#EC4899" />
+                                </linearGradient>
+                            </defs>
+                        </svg>
+                    </div>
+                    <div class="logo-text">
+                        <h1>Third Eye</h1>
+                        <p>AI Safety Platform</p>
+                    </div>
+                </div>
+                <div class="header-actions">
+                    <div class="status-indicator" id="statusBadge">
+                        <div class="status-dot"></div>
+                        <span>System Ready</span>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="main-grid">
+            <!-- Upload Section -->
+            <section class="upload-container">
+                <div class="card-glass upload-card">
+                    <div class="card-header">
+                        <h2>Upload Image</h2>
+                        <p>Analyze traffic violations with AI</p>
+                    </div>
+
+                    <div class="upload-zone" id="uploadArea">
+                        <input type="file" id="fileInput" accept="image/*" hidden>
+                        <div class="upload-icon-wrapper">
+                            <div class="upload-icon-bg"></div>
+                            <svg class="upload-icon" width="48" height="48" viewBox="0 0 48 48" fill="none">
+                                <path d="M24 8V32M24 8L16 16M24 8L32 16" stroke="currentColor" stroke-width="3"
+                                    stroke-linecap="round" />
+                                <path d="M8 32V38C8 40.2091 9.79086 42 12 42H36C38.2091 42 40 40.2091 40 38V32"
+                                    stroke="currentColor" stroke-width="3" stroke-linecap="round" />
+                            </svg>
+                        </div>
+                        <h3>Drop your image here</h3>
+                        <p>or click to browse files</p>
+                        <button class="btn-primary" id="browseBtn">
+                            <span>Choose Image</span>
+                            <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                                <path d="M10 4V16M4 10H16" stroke="currentColor" stroke-width="2"
+                                    stroke-linecap="round" />
+                            </svg>
+                        </button>
+                        <div class="file-formats">
+                            <span class="format-badge">JPG</span>
+                            <span class="format-badge">PNG</span>
+                            <span class="format-badge">WEBP</span>
+                        </div>
+                    </div>
+
+                    <!-- Preview Section -->
+                    <div class="preview-container" id="previewSection" style="display: none;">
+                        <div class="preview-header">
+                            <h3>Preview</h3>
+                            <button class="btn-ghost" id="resetBtn">
+                                <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                                    <path
+                                        d="M4 10C4 6.68629 6.68629 4 10 4C13.3137 4 16 6.68629 16 10C16 13.3137 13.3137 16 10 16"
+                                        stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+                                    <path d="M10 4L10 1M10 4L7 4" stroke="currentColor" stroke-width="2"
+                                        stroke-linecap="round" />
+                                </svg>
+                                New Image
+                            </button>
+                        </div>
+                        <div class="image-preview">
+                            <img id="previewImage" alt="Preview">
+                        </div>
+                        <button class="btn-analyze" id="analyzeBtn">
+                            <span class="btn-shine"></span>
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                <circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2" />
+                                <path d="M20 20L16 16" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+                            </svg>
+                            <span>Analyze Image</span>
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Results Section -->
+            <section class="results-container" id="resultsSection" style="display: none;">
+                <div class="card-glass results-card">
+                    <div class="results-header">
+                        <h2>Detection Results</h2>
+                        <div class="stats-grid" id="resultsStats"></div>
+                    </div>
+
+                    <div class="annotated-preview">
+                        <h3>Analyzed Image</h3>
+                        <div class="image-result">
+                            <img id="annotatedImage" alt="Analysis results">
+                        </div>
+                    </div>
+
+                    <div class="detections-list" id="detectionsGrid"></div>
+                </div>
+            </section>
+        </main>
+
+        <!-- Loading Overlay -->
+        <div class="loading-modal" id="loadingOverlay" style="display: none;">
+            <div class="loading-card">
+                <div class="loading-spinner">
+                    <div class="spinner-ring"></div>
+                    <div class="spinner-ring"></div>
+                    <div class="spinner-ring"></div>
+                </div>
+                <h3>Analyzing with AI</h3>
+                <p>Processing your image...</p>
+                <div class="loading-steps">
+                    <div class="step-item">
+                        <div class="step-icon">🔍</div>
+                        <span>Running YOLOv8 Detection</span>
+                    </div>
+                    <div class="step-item">
+                        <div class="step-icon">📝</div>
+                        <span>Extracting License Plates</span>
+                    </div>
+                    <div class="step-item">
+                        <div class="step-icon">⚡</div>
+                        <span>Analyzing Violations</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Error Modal -->
+        <div class="error-modal" id="errorMessage" style="display: none;">
+            <div class="error-card">
+                <div class="error-icon">⚠️</div>
+                <h3>Error</h3>
+                <p id="errorText"></p>
+                <button class="btn-secondary" onclick="hideError()">Dismiss</button>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer class="footer-glass">
+            <p>Powered by YOLOv8 & EasyOCR • Real-time AI Detection</p>
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>

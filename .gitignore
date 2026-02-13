@@ -1,0 +1,46 @@
+# Dependencies
+node_modules/
+venv/
+__pycache__/
+
+# Build outputs
+.next/
+dist/
+build/
+
+# Environment variables
+.env
+.env.local
+.env.production
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Training dataset (optional - uncomment to exclude)
+# helmet_detection/
+
+# Logs
+*.log
+npm-debug.log*
+
+# Model checkpoints (if you want to exclude large files)
+# *.pt
+
+# Python cache
+*.pyc
+*.pyo
+*.pyd
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Testing
+coverage/
+.pytest_cache/
