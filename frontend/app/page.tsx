@@ -67,7 +67,9 @@ export default function Home() {
             const data = await apiResponse.json();
             setResults(data);
         } catch (err) {
-            setError(err instanceof Error ? err.message : 'An error occurred');
+            console.error('Detection Error:', err);
+            const message = err instanceof Error ? err.message : 'An error occurred';
+            setError(`${message} (Target: ${API_URL}/detect). \n\nCheck if your backend is running and supports HTTPS.`);
         } finally {
             setIsAnalyzing(false);
         }
