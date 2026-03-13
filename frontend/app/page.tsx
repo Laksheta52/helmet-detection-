@@ -24,7 +24,7 @@ export default function Home() {
     const [systemStatus, setSystemStatus] = useState('Connecting...');
     const fileInputRef = useRef<HTMLInputElement>(null);
 
-    const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000';
+    const API_URL = (process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000').replace(/\/$/, '');
 
     useEffect(() => {
         const checkHealth = () => {
