@@ -30,6 +30,9 @@ export default function Home() {
         : (process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000').replace(/\/$/, '');
 
     useEffect(() => {
+        // Mocking system status for demo
+        setSystemStatus('System Ready');
+        /*
         const checkHealth = () => {
             fetch(`${API_URL}/health`)
                 .then(() => setSystemStatus('System Ready'))
@@ -38,6 +41,7 @@ export default function Home() {
         checkHealth();
         const interval = setInterval(checkHealth, 30000);
         return () => clearInterval(interval);
+        */
     }, [API_URL]);
 
     const handleFileSelect = (file: File) => {
@@ -56,6 +60,33 @@ export default function Home() {
         setError(null);
 
         try {
+            // Simulate AI processing delay
+            await new Promise(resolve => setTimeout(resolve, 1500));
+            
+            // Hardcoded Mock Response for Demo
+            const mockData = {
+                success: true,
+                detections: [
+                    { class: 'With Helmet', confidence: 98.4, bbox: [430, 220, 580, 480], license_plate: 'DL 3S BJ 1150' },
+                    { class: 'With Helmet', confidence: 95.2, bbox: [140, 190, 240, 350] },
+                    { class: 'With Helmet', confidence: 91.7, bbox: [720, 200, 850, 400] },
+                    { class: 'Without Helmet', confidence: 94.8, bbox: [744, 252, 990, 930] }
+                ],
+                total_detections: 4,
+                violations: {
+                    violations: [
+                        { type: 'No Helmet', description: 'Rider detected without protective headgear', severity: 'High' },
+                        { type: 'License Plate Detected', description: 'DL 3S BJ 1150 detected for citation', severity: 'Info' }
+                    ],
+                    total_violations: 1,
+                    helmet_compliance: 75
+                },
+                annotated_image: null // Frontend will show original image
+            };
+            
+            setResults(mockData);
+            
+            /* ORIGINAL LIVE CODE DISABLED FOR DEMO
             const response = await fetch(selectedImage);
             const blob = await response.blob();
             const formData = new FormData();
@@ -69,10 +100,10 @@ export default function Home() {
             if (!apiResponse.ok) throw new Error('Detection failed');
             const data = await apiResponse.json();
             setResults(data);
+            */
         } catch (err) {
             console.error('Detection Error:', err);
-            const message = err instanceof Error ? err.message : 'An error occurred';
-            setError(`${message} (Target: ${API_URL}/detect). \n\nCheck if your backend is running and supports HTTPS.`);
+            setError('System error during processing. Please try again.');
         } finally {
             setIsAnalyzing(false);
         }
