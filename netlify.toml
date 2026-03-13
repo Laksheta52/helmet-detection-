@@ -5,3 +5,9 @@
 
 [[plugins]]
   package = "@netlify/plugin-nextjs"
+
+[[redirects]]
+  from = "/proxy/*"
+  to = "https://helmet-detection-4if8.onrender.com/:splat"
+  status = 200
+  force = true

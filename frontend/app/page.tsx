@@ -24,7 +24,10 @@ export default function Home() {
     const [systemStatus, setSystemStatus] = useState('Connecting...');
     const fileInputRef = useRef<HTMLInputElement>(null);
 
-    const API_URL = (process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000').replace(/\/$/, '');
+    // Use /proxy in production to bypass CORS, or localhost in development
+    const API_URL = typeof window !== 'undefined' && window.location.hostname !== 'localhost' 
+        ? '/proxy' 
+        : (process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000').replace(/\/$/, '');
 
     useEffect(() => {
         const checkHealth = () => {
