@@ -13,7 +13,8 @@ from vehicle_db import vehicle_db
 import tempfile
 
 app = Flask(__name__)
-CORS(app)
+# Explicitly allowing all origins and headers for production connection
+CORS(app, resources={r"/*": {"origins": "*"}}, supports_credentials=True)
 
 # Initialize model and OCR reader
 print("="*60)
@@ -66,7 +67,7 @@ def health():
         'status': 'healthy', 
         'model': model_name,
         'custom_model': use_custom_model,
-        'ocr': 'EasyOCR',
+        'ocr': 'Disabled (Memory Optimized)',
         'video_support': True
     })
 
