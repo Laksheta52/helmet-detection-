@@ -1,7 +1,7 @@
 from flask import Flask, request, jsonify
 from flask_cors import CORS
 from ultralytics import YOLO
-import easyocr
+# import easyocr
 import cv2
 import numpy as np
 import base64
@@ -46,8 +46,8 @@ else:
 
 print(f"\n✓ Model loaded: {model_name}")
 
-print("\n📝 Initializing EasyOCR for license plate recognition...")
-reader = easyocr.Reader(['en'], gpu=False)
+print("\n📝 Skipping EasyOCR for memory efficiency...")
+# reader = easyocr.Reader(['en'], gpu=False)
 
 print("\n📱 Initializing SMS notification service...")
 print(f"SMS Status: {'Enabled (Twilio)' if sms_service.enabled else 'Demo Mode'}")
@@ -113,19 +113,17 @@ def detect():
                     roi = image[max(0, y1):min(image.shape[0], y2), 
                                max(0, x1):min(image.shape[1], x2)]
                     
+                    """
                     if roi.size > 0:
                         try:
-                            ocr_results = reader.readtext(roi, paragraph=False)
-                            plate_texts = []
-                            for ocr_detection in ocr_results:
-                                text = ocr_detection[1].strip()
-                                if len(text) >= 4 and any(c.isdigit() for c in text):
-                                    plate_texts.append(text)
-                            
-                            if plate_texts:
-                                detection_data['license_plate'] = ' '.join(plate_texts)
+                            # reader is disabled for memory efficiency
+                            pass
+                            # ocr_results = reader.readtext(roi, paragraph=False)
+                            # ...
                         except Exception as e:
                             print(f"OCR error: {e}")
+                    """
+                    pass
                 
                 detections.append(detection_data)
                 
